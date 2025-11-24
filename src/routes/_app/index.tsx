@@ -2,7 +2,7 @@ import { createFileRoute, getRouteApi } from '@tanstack/react-router'
 
 const routeApi = getRouteApi('__root__')
 
-export const Route = createFileRoute('/_app/dashboard')({
+export const Route = createFileRoute('/_app/')({
     component: RouteComponent
 })
 

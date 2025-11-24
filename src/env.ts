@@ -3,7 +3,7 @@ import { z } from 'zod'
 
 export const env = createEnv({
     server: {
-        SERVER_URL: z.url().optional(),
+        SERVER_URL: z.string().url().optional(),
         KEYCLOAK_CLIENT_ID: z.string().min(1),
         KEYCLOAK_CLIENT_SECRET: z.string().min(1),
         KEYCLOAK_ISSUER: z.string().min(1)
@@ -12,10 +12,23 @@ export const env = createEnv({
     clientPrefix: 'VITE_',
 
     client: {
+        VITE_API_URL: z.string().min(1),
         VITE_APP_TITLE: z.string().min(1).optional()
     },
 
-    runtimeEnv: process.env,
+    shared: {
+        API_URL: z.string().min(1)
+    },
+
+    runtimeEnv: {
+        SERVER_URL: process.env.SERVER_URL,
+        KEYCLOAK_CLIENT_ID: process.env.KEYCLOAK_CLIENT_ID,
+        KEYCLOAK_CLIENT_SECRET: process.env.KEYCLOAK_CLIENT_SECRET,
+        KEYCLOAK_ISSUER: process.env.KEYCLOAK_ISSUER,
+        VITE_API_URL: import.meta.env.VITE_API_URL,
+        VITE_APP_TITLE: import.meta.env.VITE_APP_TITLE,
+        API_URL: import.meta.env.VITE_API_URL || process.env.API_URL
+    },
 
     /**
      * By default, this library will feed the environment variables directly to

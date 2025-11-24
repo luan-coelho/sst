@@ -4,8 +4,8 @@ import { createRootRouteWithContext, HeadContent, redirect, Scripts } from '@tan
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { createServerFn } from '@tanstack/react-start'
 import * as React from 'react'
-import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
 import { authMiddleware } from '../middleware'
+import TanStackQueryDevtools from '../providers/tanstack-query/devtools'
 import appCss from '../styles.css?url'
 
 interface MyRouterContext {

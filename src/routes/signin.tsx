@@ -10,7 +10,7 @@ function SignInPage() {
     useEffect(() => {
         authClient.signIn.social({
             provider: 'keycloak',
-            callbackURL: '/dashboard'
+            callbackURL: '/'
         })
     }, [])
 
