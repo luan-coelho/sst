@@ -1,15 +1,42 @@
 import { TanStackDevtools } from '@tanstack/react-devtools'
-import { HeadContent, Scripts, createRootRouteWithContext } from '@tanstack/react-router'
-import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
-import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
-import appCss from '../styles.css?url'
 import type { QueryClient } from '@tanstack/react-query'
+import { createRootRouteWithContext, HeadContent, redirect, Scripts } from '@tanstack/react-router'
+import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
+import { createServerFn } from '@tanstack/react-start'
+import * as React from 'react'
+import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
+import { authMiddleware } from '../middleware'
+import appCss from '../styles.css?url'
 
 interface MyRouterContext {
     queryClient: QueryClient
+    user?: Awaited<ReturnType<typeof authCheck>>['user']
+    session?: Awaited<ReturnType<typeof authCheck>>['session']
 }
 
+const authCheck = createServerFn({ method: 'GET' })
+    .middleware([authMiddleware])
+    .handler(async ({ context }) => {
+        return context
+    })
+
 export const Route = createRootRouteWithContext<MyRouterContext>()({
+    beforeLoad: async ({ location }) => {
+        if (location.pathname === '/signin') return
+
+        const { user, session } = await authCheck()
+
+        if (!session) {
+            throw redirect({
+                to: '/signin'
+            })
+        }
+
+        return {
+            user,
+            session
+        }
+    },
     head: () => ({
         meta: [
             {
