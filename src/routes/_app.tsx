@@ -1,16 +1,36 @@
-import { createFileRoute, Link, Outlet, useRouter } from '@tanstack/react-router'
+import { env } from '@/env'
+import { createFileRoute, Link, Outlet, redirect, useNavigate, useRouter } from '@tanstack/react-router'
+import { createServerFn } from '@tanstack/react-start'
 import { authClient } from '../lib/auth-client'
+
+export const getLogoutUrl = createServerFn().handler(async () => {
+    const keycloakIssuer = env.KEYCLOAK_ISSUER
+    const redirectUrl = 'http://localhost:3000/signin'
+    const clientId = env.KEYCLOAK_CLIENT_ID
+    const logoutUrl = `${keycloakIssuer}/protocol/openid-connect/logout?post_logout_redirect_uri=${encodeURIComponent(redirectUrl)}&client_id=${clientId}`
+    return logoutUrl
+})
 
 export const Route = createFileRoute('/_app')({
     component: AppLayout
 })
 
 function AppLayout() {
+    const navigate = useNavigate()
     const router = useRouter()
 
     const handleSignOut = async () => {
-        await authClient.signOut()
-        router.invalidate()
+        await authClient.signOut({
+            fetchOptions: {
+                onSuccess: async () => {
+                    const logoutUrl = await getLogoutUrl()
+                    navigate({
+                        href: logoutUrl,
+                        reloadDocument: true
+                    })
+                }
+            }
+        })
     }
 
     return (
