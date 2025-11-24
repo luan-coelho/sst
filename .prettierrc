@@ -1,0 +1,15 @@
+{
+    "endOfLine": "auto",
+    "semi": false,
+    "singleQuote": true,
+    "tabWidth": 4,
+    "trailingComma": "none",
+    "htmlWhitespaceSensitivity": "ignore",
+    "bracketSameLine": true,
+    "printWidth": 120,
+    "arrowParens": "avoid",
+    "plugins": ["@ianvs/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
+    "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"],
+    "importOrderTypeScriptVersion": "5.0.0",
+    "importOrderCaseSensitive": false
+}
