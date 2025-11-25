@@ -8,190 +8,255 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import type { createStart } from '@tanstack/react-start'
+import type { getRouter } from './router.tsx'
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SigninRouteImport } from './routes/signin'
-import { Route as AppRouteRouteImport } from './routes/_app/route'
 import { Route as AppIndexRouteImport } from './routes/_app/index'
 import { Route as AppProfileRouteImport } from './routes/_app/profile'
+import { Route as AppRouteRouteImport } from './routes/_app/route'
+import { Route as AppSocCompaniesCompanyIdRouteImport } from './routes/_app/soc/companies/$companyId'
+import { Route as AppSocCompaniesIndexRouteImport } from './routes/_app/soc/companies/index'
+import { Route as AppSocIndexRouteImport } from './routes/_app/soc/index'
+import { Route as AppUsersUserIdRouteImport } from './routes/_app/users/$userId'
 import { Route as AppUsersIndexRouteImport } from './routes/_app/users/index'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
-import { Route as AppUsersUserIdRouteImport } from './routes/_app/users/$userId'
+import { Route as SigninRouteImport } from './routes/signin'
 
 const SigninRoute = SigninRouteImport.update({
-  id: '/signin',
-  path: '/signin',
-  getParentRoute: () => rootRouteImport,
+    id: '/signin',
+    path: '/signin',
+    getParentRoute: () => rootRouteImport
 } as any)
 const AppRouteRoute = AppRouteRouteImport.update({
-  id: '/_app',
-  getParentRoute: () => rootRouteImport,
+    id: '/_app',
+    getParentRoute: () => rootRouteImport
 } as any)
 const AppIndexRoute = AppIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AppRouteRoute,
+    id: '/',
+    path: '/',
+    getParentRoute: () => AppRouteRoute
 } as any)
 const AppProfileRoute = AppProfileRouteImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => AppRouteRoute,
+    id: '/profile',
+    path: '/profile',
+    getParentRoute: () => AppRouteRoute
 } as any)
 const AppUsersIndexRoute = AppUsersIndexRouteImport.update({
-  id: '/users/',
-  path: '/users/',
-  getParentRoute: () => AppRouteRoute,
+    id: '/users/',
+    path: '/users/',
+    getParentRoute: () => AppRouteRoute
+} as any)
+const AppSocIndexRoute = AppSocIndexRouteImport.update({
+    id: '/soc/',
+    path: '/soc/',
+    getParentRoute: () => AppRouteRoute
 } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
-  id: '/api/auth/$',
-  path: '/api/auth/$',
-  getParentRoute: () => rootRouteImport,
+    id: '/api/auth/$',
+    path: '/api/auth/$',
+    getParentRoute: () => rootRouteImport
 } as any)
 const AppUsersUserIdRoute = AppUsersUserIdRouteImport.update({
-  id: '/users/$userId',
-  path: '/users/$userId',
-  getParentRoute: () => AppRouteRoute,
+    id: '/users/$userId',
+    path: '/users/$userId',
+    getParentRoute: () => AppRouteRoute
+} as any)
+const AppSocCompaniesIndexRoute = AppSocCompaniesIndexRouteImport.update({
+    id: '/soc/companies/',
+    path: '/soc/companies/',
+    getParentRoute: () => AppRouteRoute
+} as any)
+const AppSocCompaniesCompanyIdRoute = AppSocCompaniesCompanyIdRouteImport.update({
+    id: '/soc/companies/$companyId',
+    path: '/soc/companies/$companyId',
+    getParentRoute: () => AppRouteRoute
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/signin': typeof SigninRoute
-  '/profile': typeof AppProfileRoute
-  '/': typeof AppIndexRoute
-  '/users/$userId': typeof AppUsersUserIdRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
-  '/users': typeof AppUsersIndexRoute
+    '/signin': typeof SigninRoute
+    '/profile': typeof AppProfileRoute
+    '/': typeof AppIndexRoute
+    '/users/$userId': typeof AppUsersUserIdRoute
+    '/api/auth/$': typeof ApiAuthSplatRoute
+    '/soc': typeof AppSocIndexRoute
+    '/users': typeof AppUsersIndexRoute
+    '/soc/companies/$companyId': typeof AppSocCompaniesCompanyIdRoute
+    '/soc/companies': typeof AppSocCompaniesIndexRoute
 }
 export interface FileRoutesByTo {
-  '/signin': typeof SigninRoute
-  '/profile': typeof AppProfileRoute
-  '/': typeof AppIndexRoute
-  '/users/$userId': typeof AppUsersUserIdRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
-  '/users': typeof AppUsersIndexRoute
+    '/signin': typeof SigninRoute
+    '/profile': typeof AppProfileRoute
+    '/': typeof AppIndexRoute
+    '/users/$userId': typeof AppUsersUserIdRoute
+    '/api/auth/$': typeof ApiAuthSplatRoute
+    '/soc': typeof AppSocIndexRoute
+    '/users': typeof AppUsersIndexRoute
+    '/soc/companies/$companyId': typeof AppSocCompaniesCompanyIdRoute
+    '/soc/companies': typeof AppSocCompaniesIndexRoute
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/_app': typeof AppRouteRouteWithChildren
-  '/signin': typeof SigninRoute
-  '/_app/profile': typeof AppProfileRoute
-  '/_app/': typeof AppIndexRoute
-  '/_app/users/$userId': typeof AppUsersUserIdRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
-  '/_app/users/': typeof AppUsersIndexRoute
+    __root__: typeof rootRouteImport
+    '/_app': typeof AppRouteRouteWithChildren
+    '/signin': typeof SigninRoute
+    '/_app/profile': typeof AppProfileRoute
+    '/_app/': typeof AppIndexRoute
+    '/_app/users/$userId': typeof AppUsersUserIdRoute
+    '/api/auth/$': typeof ApiAuthSplatRoute
+    '/_app/soc/': typeof AppSocIndexRoute
+    '/_app/users/': typeof AppUsersIndexRoute
+    '/_app/soc/companies/$companyId': typeof AppSocCompaniesCompanyIdRoute
+    '/_app/soc/companies/': typeof AppSocCompaniesIndexRoute
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/signin'
-    | '/profile'
-    | '/'
-    | '/users/$userId'
-    | '/api/auth/$'
-    | '/users'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/signin' | '/profile' | '/' | '/users/$userId' | '/api/auth/$' | '/users'
-  id:
-    | '__root__'
-    | '/_app'
-    | '/signin'
-    | '/_app/profile'
-    | '/_app/'
-    | '/_app/users/$userId'
-    | '/api/auth/$'
-    | '/_app/users/'
-  fileRoutesById: FileRoutesById
+    fileRoutesByFullPath: FileRoutesByFullPath
+    fullPaths:
+        | '/signin'
+        | '/profile'
+        | '/'
+        | '/users/$userId'
+        | '/api/auth/$'
+        | '/soc'
+        | '/users'
+        | '/soc/companies/$companyId'
+        | '/soc/companies'
+    fileRoutesByTo: FileRoutesByTo
+    to:
+        | '/signin'
+        | '/profile'
+        | '/'
+        | '/users/$userId'
+        | '/api/auth/$'
+        | '/soc'
+        | '/users'
+        | '/soc/companies/$companyId'
+        | '/soc/companies'
+    id:
+        | '__root__'
+        | '/_app'
+        | '/signin'
+        | '/_app/profile'
+        | '/_app/'
+        | '/_app/users/$userId'
+        | '/api/auth/$'
+        | '/_app/soc/'
+        | '/_app/users/'
+        | '/_app/soc/companies/$companyId'
+        | '/_app/soc/companies/'
+    fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  AppRouteRoute: typeof AppRouteRouteWithChildren
-  SigninRoute: typeof SigninRoute
-  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+    AppRouteRoute: typeof AppRouteRouteWithChildren
+    SigninRoute: typeof SigninRoute
+    ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
 declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/signin': {
-      id: '/signin'
-      path: '/signin'
-      fullPath: '/signin'
-      preLoaderRoute: typeof SigninRouteImport
-      parentRoute: typeof rootRouteImport
+    interface FileRoutesByPath {
+        '/signin': {
+            id: '/signin'
+            path: '/signin'
+            fullPath: '/signin'
+            preLoaderRoute: typeof SigninRouteImport
+            parentRoute: typeof rootRouteImport
+        }
+        '/_app': {
+            id: '/_app'
+            path: ''
+            fullPath: ''
+            preLoaderRoute: typeof AppRouteRouteImport
+            parentRoute: typeof rootRouteImport
+        }
+        '/_app/': {
+            id: '/_app/'
+            path: '/'
+            fullPath: '/'
+            preLoaderRoute: typeof AppIndexRouteImport
+            parentRoute: typeof AppRouteRoute
+        }
+        '/_app/profile': {
+            id: '/_app/profile'
+            path: '/profile'
+            fullPath: '/profile'
+            preLoaderRoute: typeof AppProfileRouteImport
+            parentRoute: typeof AppRouteRoute
+        }
+        '/_app/users/': {
+            id: '/_app/users/'
+            path: '/users'
+            fullPath: '/users'
+            preLoaderRoute: typeof AppUsersIndexRouteImport
+            parentRoute: typeof AppRouteRoute
+        }
+        '/_app/soc/': {
+            id: '/_app/soc/'
+            path: '/soc'
+            fullPath: '/soc'
+            preLoaderRoute: typeof AppSocIndexRouteImport
+            parentRoute: typeof AppRouteRoute
+        }
+        '/api/auth/$': {
+            id: '/api/auth/$'
+            path: '/api/auth/$'
+            fullPath: '/api/auth/$'
+            preLoaderRoute: typeof ApiAuthSplatRouteImport
+            parentRoute: typeof rootRouteImport
+        }
+        '/_app/users/$userId': {
+            id: '/_app/users/$userId'
+            path: '/users/$userId'
+            fullPath: '/users/$userId'
+            preLoaderRoute: typeof AppUsersUserIdRouteImport
+            parentRoute: typeof AppRouteRoute
+        }
+        '/_app/soc/companies/': {
+            id: '/_app/soc/companies/'
+            path: '/soc/companies'
+            fullPath: '/soc/companies'
+            preLoaderRoute: typeof AppSocCompaniesIndexRouteImport
+            parentRoute: typeof AppRouteRoute
+        }
+        '/_app/soc/companies/$companyId': {
+            id: '/_app/soc/companies/$companyId'
+            path: '/soc/companies/$companyId'
+            fullPath: '/soc/companies/$companyId'
+            preLoaderRoute: typeof AppSocCompaniesCompanyIdRouteImport
+            parentRoute: typeof AppRouteRoute
+        }
     }
-    '/_app': {
-      id: '/_app'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof AppRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_app/': {
-      id: '/_app/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof AppIndexRouteImport
-      parentRoute: typeof AppRouteRoute
-    }
-    '/_app/profile': {
-      id: '/_app/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof AppProfileRouteImport
-      parentRoute: typeof AppRouteRoute
-    }
-    '/_app/users/': {
-      id: '/_app/users/'
-      path: '/users'
-      fullPath: '/users'
-      preLoaderRoute: typeof AppUsersIndexRouteImport
-      parentRoute: typeof AppRouteRoute
-    }
-    '/api/auth/$': {
-      id: '/api/auth/$'
-      path: '/api/auth/$'
-      fullPath: '/api/auth/$'
-      preLoaderRoute: typeof ApiAuthSplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_app/users/$userId': {
-      id: '/_app/users/$userId'
-      path: '/users/$userId'
-      fullPath: '/users/$userId'
-      preLoaderRoute: typeof AppUsersUserIdRouteImport
-      parentRoute: typeof AppRouteRoute
-    }
-  }
 }
 
 interface AppRouteRouteChildren {
-  AppProfileRoute: typeof AppProfileRoute
-  AppIndexRoute: typeof AppIndexRoute
-  AppUsersUserIdRoute: typeof AppUsersUserIdRoute
-  AppUsersIndexRoute: typeof AppUsersIndexRoute
+    AppProfileRoute: typeof AppProfileRoute
+    AppIndexRoute: typeof AppIndexRoute
+    AppUsersUserIdRoute: typeof AppUsersUserIdRoute
+    AppSocIndexRoute: typeof AppSocIndexRoute
+    AppUsersIndexRoute: typeof AppUsersIndexRoute
+    AppSocCompaniesCompanyIdRoute: typeof AppSocCompaniesCompanyIdRoute
+    AppSocCompaniesIndexRoute: typeof AppSocCompaniesIndexRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
-  AppProfileRoute: AppProfileRoute,
-  AppIndexRoute: AppIndexRoute,
-  AppUsersUserIdRoute: AppUsersUserIdRoute,
-  AppUsersIndexRoute: AppUsersIndexRoute,
+    AppProfileRoute: AppProfileRoute,
+    AppIndexRoute: AppIndexRoute,
+    AppUsersUserIdRoute: AppUsersUserIdRoute,
+    AppSocIndexRoute: AppSocIndexRoute,
+    AppUsersIndexRoute: AppUsersIndexRoute,
+    AppSocCompaniesCompanyIdRoute: AppSocCompaniesCompanyIdRoute,
+    AppSocCompaniesIndexRoute: AppSocCompaniesIndexRoute
 }
 
-const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
-  AppRouteRouteChildren,
-)
+const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(AppRouteRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  AppRouteRoute: AppRouteRouteWithChildren,
-  SigninRoute: SigninRoute,
-  ApiAuthSplatRoute: ApiAuthSplatRoute,
+    AppRouteRoute: AppRouteRouteWithChildren,
+    SigninRoute: SigninRoute,
+    ApiAuthSplatRoute: ApiAuthSplatRoute
 }
-export const routeTree = rootRouteImport
-  ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+export const routeTree = rootRouteImport._addFileChildren(rootRouteChildren)._addFileTypes<FileRouteTypes>()
 
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
 declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
+    interface Register {
+        ssr: true
+        router: Awaited<ReturnType<typeof getRouter>>
+    }
 }

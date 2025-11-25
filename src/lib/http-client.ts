@@ -1,19 +1,17 @@
-import { env } from '@/env'
 import { ApiError } from '@/lib/types/api'
 import { authClient } from './auth-client'
+import { getApiUrl } from './env-config'
 
 /**
  * Cliente HTTP com suporte a autenticação JWT
  * Adiciona automaticamente o token de acesso nas requisições
  */
 export class HttpClient {
-    private static apiBaseUrl = env.API_URL
-
     /**
      * Realiza uma requisição HTTP com autenticação
      */
     static async fetch<T>(url: string, options: RequestInit = {}): Promise<T> {
-        const fullUrl = url.startsWith('http') ? url : `${this.apiBaseUrl}${url}`
+        const fullUrl = url.startsWith('http') ? url : `${getApiUrl()}${url}`
 
         const { data } = await authClient.getAccessToken({ providerId: 'keycloak' })
 

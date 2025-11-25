@@ -11,11 +11,14 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar'
 import { authClient } from '@/lib/auth-client'
+import { getLogoutUrl } from '@/server/auth'
+import { useNavigate } from '@tanstack/react-router'
 import { ChevronsUpDown, LogOut } from 'lucide-react'
 import { Skeleton } from './ui/skeleton'
 
 export function NavUser() {
     const { data: session, isPending } = authClient.useSession()
+    const navigate = useNavigate()
     const { isMobile } = useSidebar()
 
     if (isPending) {
@@ -23,7 +26,18 @@ export function NavUser() {
     }
 
     async function handleSignOut() {
-        await authClient.signOut()
+        await authClient.signOut({
+            fetchOptions: {
+                onSuccess: async () => {
+                    const logoutUrl = await getLogoutUrl()
+                    navigate({
+                        href: logoutUrl,
+                        reloadDocument: true,
+                        replace: true
+                    })
+                }
+            }
+        })
     }
 
     return (

@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge'
 import { UsersFilterSheet } from '@/components/users-filter-sheet'
 import { UsersTable } from '@/components/users-table'
 import { userService } from '@/lib/services/user-service'
+import { UserSchema } from '@/lib/types/user'
 import { UserFiltersProvider, useUserFiltersContext } from '@/providers/user-filters-provider'
 import { useQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
@@ -25,7 +26,7 @@ function RouteComponent() {
 
     const { data, isLoading, error } = useQuery({
         queryKey: ['users', queryParams],
-        queryFn: () => userService.list(queryParams),
+        queryFn: () => userService.getAll<UserSchema>(queryParams),
         placeholderData: prev => prev
     })
 

@@ -3,45 +3,37 @@ import { z } from 'zod'
 
 export const env = createEnv({
     server: {
-        SERVER_URL: z.string().url().optional(),
+        API_URL: z.url(),
         KEYCLOAK_CLIENT_ID: z.string().min(1),
         KEYCLOAK_CLIENT_SECRET: z.string().min(1),
-        KEYCLOAK_ISSUER: z.string().min(1)
+        KEYCLOAK_ISSUER: z.string().min(1),
+        NODE_ENV: z.enum(['development', 'production', 'test']),
+        // Adicionei as variáveis do Better Auth que estavam no seu .env mas fora do schema
+        BETTER_AUTH_URL: z.string().url().optional(),
+        BETTER_AUTH_SECRET: z.string().min(1).optional()
     },
 
     clientPrefix: 'VITE_',
 
     client: {
-        VITE_API_URL: z.string().min(1),
-        VITE_APP_TITLE: z.string().min(1).optional()
+        VITE_API_URL: z.url()
     },
 
-    shared: {
-        API_URL: z.string().min(1)
-    },
-
+    // --- A CORREÇÃO ESTÁ AQUI ---
+    // Em projetos Vite/Client-side, você DEVE listar cada chave manualmente.
+    // O bundler não consegue ler `process.env[key]` dinamicamente.
     runtimeEnv: {
-        SERVER_URL: process.env.SERVER_URL,
+        NODE_ENV: process.env.NODE_ENV,
+        API_URL: process.env.API_URL,
         KEYCLOAK_CLIENT_ID: process.env.KEYCLOAK_CLIENT_ID,
         KEYCLOAK_CLIENT_SECRET: process.env.KEYCLOAK_CLIENT_SECRET,
         KEYCLOAK_ISSUER: process.env.KEYCLOAK_ISSUER,
-        VITE_API_URL: import.meta.env.VITE_API_URL,
-        VITE_APP_TITLE: import.meta.env.VITE_APP_TITLE,
-        API_URL: import.meta.env.VITE_API_URL || process.env.API_URL
+        BETTER_AUTH_URL: process.env.BETTER_AUTH_URL,
+        BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
+
+        // Variáveis CLIENTE vêm de import.meta.env
+        VITE_API_URL: import.meta.env.VITE_API_URL
     },
 
-    /**
-     * By default, this library will feed the environment variables directly to
-     * the Zod validator.
-     *
-     * This means that if you have an empty string for a value that is supposed
-     * to be a number (e.g. `PORT=` in a ".env" file), Zod will incorrectly flag
-     * it as a type mismatch violation. Additionally, if you have an empty string
-     * for a value that is supposed to be a string with a default value (e.g.
-     * `DOMAIN=` in an ".env" file), the default value will never be applied.
-     *
-     * In order to solve these issues, we recommend that all new projects
-     * explicitly specify this option as true.
-     */
     emptyStringAsUndefined: true
 })

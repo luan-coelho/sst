@@ -62,7 +62,7 @@ export function EditUserDialog({ user, open, onOpenChange }: EditUserDialogProps
             if (!user) throw new Error('Usuário não encontrado')
 
             // Atualiza os dados do usuário
-            return await userService.update(user.id, data)
+            return await userService.updateById(user.id, data)
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['users'] })

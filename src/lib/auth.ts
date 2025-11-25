@@ -1,6 +1,6 @@
+import { env } from '@/env'
 import { betterAuth } from 'better-auth'
 import { genericOAuth, keycloak } from 'better-auth/plugins'
-import { env } from '@/env'
 
 export const auth = betterAuth({
     plugins: [

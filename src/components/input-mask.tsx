@@ -1,10 +1,10 @@
 import React, { forwardRef } from 'react'
 
 interface InputMaskProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'children'> {
-  mask: string
-  value: string
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
-  children: (props: React.InputHTMLAttributes<HTMLInputElement>) => React.ReactElement
+    mask: string
+    value: string
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+    children: (props: React.InputHTMLAttributes<HTMLInputElement>) => React.ReactElement
 }
 
 /**
@@ -14,24 +14,24 @@ interface InputMaskProps extends Omit<React.InputHTMLAttributes<HTMLInputElement
  * @returns Valor mascarado
  */
 export function applyMask(value: string, mask: string): string {
-  if (!value) return ''
+    if (!value) return ''
 
-  // Remove todos os caracteres não numéricos
-  const numbers = value.replace(/\D/g, '')
-  let maskedValue = ''
-  let numberIndex = 0
+    // Remove todos os caracteres não numéricos
+    const numbers = value.replace(/\D/g, '')
+    let maskedValue = ''
+    let numberIndex = 0
 
-  // Itera pela máscara e aplica os números
-  for (let i = 0; i < mask.length && numberIndex < numbers.length; i++) {
-    if (mask[i] === '9') {
-      maskedValue += numbers[numberIndex]
-      numberIndex++
-    } else {
-      maskedValue += mask[i]
+    // Itera pela máscara e aplica os números
+    for (let i = 0; i < mask.length && numberIndex < numbers.length; i++) {
+        if (mask[i] === '9') {
+            maskedValue += numbers[numberIndex]
+            numberIndex++
+        } else {
+            maskedValue += mask[i]
+        }
     }
-  }
 
-  return maskedValue
+    return maskedValue
 }
 
 /**
@@ -40,7 +40,7 @@ export function applyMask(value: string, mask: string): string {
  * @returns Valor sem máscara (apenas números)
  */
 export function removeMask(value: string): string {
-  return value.replace(/\D/g, '')
+    return value.replace(/\D/g, '')
 }
 
 /**
@@ -55,32 +55,32 @@ export function removeMask(value: string): string {
  * </InputMask>
  */
 export const InputMask = forwardRef<HTMLInputElement, InputMaskProps>(
-  ({ mask, value, onChange, children, ...rest }, ref) => {
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const inputValue = event.target.value
-      const maskedValue = applyMask(inputValue, mask)
+    ({ mask, value, onChange, children, ...rest }, ref) => {
+        const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+            const inputValue = event.target.value
+            const maskedValue = applyMask(inputValue, mask)
 
-      // Cria um novo evento com o valor mascarado
-      const syntheticEvent = {
-        ...event,
-        target: {
-          ...event.target,
-          value: maskedValue
+            // Cria um novo evento com o valor mascarado
+            const syntheticEvent = {
+                ...event,
+                target: {
+                    ...event.target,
+                    value: maskedValue
+                }
+            } as React.ChangeEvent<HTMLInputElement>
+
+            onChange(syntheticEvent)
         }
-      } as React.ChangeEvent<HTMLInputElement>
 
-      onChange(syntheticEvent)
+        const inputProps = {
+            ...rest,
+            ref,
+            value: applyMask(value, mask),
+            onChange: handleChange
+        }
+
+        return children(inputProps)
     }
-
-    const inputProps = {
-      ...rest,
-      ref,
-      value: applyMask(value, mask),
-      onChange: handleChange
-    }
-
-    return children(inputProps)
-  }
 )
 
 InputMask.displayName = 'InputMask'

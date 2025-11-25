@@ -12,11 +12,10 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { routes } from '@/lib/routes'
 import type { SocCompany } from '@/lib/types/soc'
 import { useSocCompanyFiltersContext } from '@/providers/company-filters-provider'
+import { Link } from '@tanstack/react-router'
 import { Building2, ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react'
-import Link from 'next/link'
 
 interface SocCompaniesTableProps {
     companies: Array<SocCompany>
@@ -114,7 +113,8 @@ export function SocCompaniesTable({ companies, isLoading, pagination }: SocCompa
                                             <DropdownMenuSeparator />
                                             <DropdownMenuItem asChild>
                                                 <Link
-                                                    href={routes.app.soc.companies.detail(company.id)}
+                                                    to="/soc/companies/$companyId"
+                                                    params={{ companyId: company.id }}
                                                     tabIndex={0}
                                                     aria-label="Ver detalhes da empresa">
                                                     Ver detalhes

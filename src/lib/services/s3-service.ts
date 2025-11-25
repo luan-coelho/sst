@@ -1,4 +1,3 @@
-import { env } from '@/env'
 import { authClient } from '@/lib/auth-client'
 import { HttpClient } from '@/lib/http-client'
 import type {
@@ -13,17 +12,20 @@ import type {
     UploadFileRequest,
     UploadFileResponse
 } from '@/lib/types/s3'
-
-const S3_BASE_URL = '/api/s3'
+import { BaseService } from './base-service'
 
 /**
  * Service para comunicação com a API S3
  */
-export class S3Service {
+export class S3Service extends BaseService {
+    constructor() {
+        super('/api/s3')
+    }
+
     /**
      * Faz upload de um arquivo para o S3
      */
-    static async uploadFile(request: UploadFileRequest): Promise<UploadFileResponse> {
+    async uploadFile(request: UploadFileRequest): Promise<UploadFileResponse> {
         const formData = new FormData()
         formData.append('fileName', request.fileName)
         formData.append('contentType', request.contentType)
@@ -37,15 +39,13 @@ export class S3Service {
             formData.append('folder', request.folder)
         }
 
-        const apiBaseUrl = env.API_URL
         const { data } = await authClient.getAccessToken({ providerId: 'keycloak' })
         const token = data?.accessToken
 
-        const response = await fetch(`${apiBaseUrl}${S3_BASE_URL}/upload`, {
+        const response = await fetch(`${this.url}/upload`, {
             method: 'POST',
             headers: {
                 Authorization: token ? `Bearer ${token}` : ''
-                // Não definir Content-Type para FormData - o browser define automaticamente
             },
             credentials: 'include',
             body: formData
@@ -62,11 +62,11 @@ export class S3Service {
     /**
      * Faz download de um arquivo do S3
      */
-    static async downloadFile(objectKey: string): Promise<Blob> {
+    async downloadFile(objectKey: string): Promise<Blob> {
         const { data } = await authClient.getAccessToken({ providerId: 'keycloak' })
         const token = data?.accessToken
 
-        const response = await fetch(`${env.API_URL}${S3_BASE_URL}/download/${objectKey}`, {
+        const response = await fetch(`${this.url}/download/${objectKey}`, {
             method: 'GET',
             headers: {
                 Authorization: token ? `Bearer ${token}` : ''
@@ -85,34 +85,34 @@ export class S3Service {
     /**
      * Deleta um arquivo do S3
      */
-    static async deleteFile(objectKey: string): Promise<void> {
-        await HttpClient.delete<void>(`${S3_BASE_URL}/${objectKey}`)
+    async deleteFile(objectKey: string): Promise<void> {
+        await HttpClient.delete<void>(`${this.url}/${objectKey}`)
     }
 
     /**
      * Gera uma URL pré-assinada para download
      */
-    static async generateDownloadUrl(request: PresignedUrlDownloadRequest): Promise<PresignedUrlResponse> {
-        return HttpClient.post<PresignedUrlResponse>(`${S3_BASE_URL}/presigned-url/download`, request)
+    async generateDownloadUrl(request: PresignedUrlDownloadRequest): Promise<PresignedUrlResponse> {
+        return HttpClient.post<PresignedUrlResponse>(`${this.url}/presigned-url/download`, request)
     }
 
     /**
      * Gera uma URL pré-assinada para upload
      */
-    static async generateUploadUrl(request: PresignedUrlUploadRequest): Promise<PresignedUrlResponse> {
-        return HttpClient.post<PresignedUrlResponse>(`${S3_BASE_URL}/presigned-url/upload`, request)
+    async generateUploadUrl(request: PresignedUrlUploadRequest): Promise<PresignedUrlResponse> {
+        return HttpClient.post<PresignedUrlResponse>(`${this.url}/presigned-url/upload`, request)
     }
 
     /**
      * Gera uma URL pré-assinada para visualização
      */
-    static async generateViewUrl(objectKey: string, durationMinutes?: number): Promise<PresignedUrlResponse> {
+    async generateViewUrl(objectKey: string, durationMinutes?: number): Promise<PresignedUrlResponse> {
         const params = new URLSearchParams()
         if (durationMinutes !== undefined) {
             params.append('duration', durationMinutes.toString())
         }
 
-        const url = `${S3_BASE_URL}/presigned-url/view/${objectKey}${params.toString() ? `?${params.toString()}` : ''}`
+        const url = `${this.url}/presigned-url/view/${objectKey}${params.toString() ? `?${params.toString()}` : ''}`
 
         return HttpClient.get<PresignedUrlResponse>(url)
     }
@@ -120,7 +120,7 @@ export class S3Service {
     /**
      * Lista objetos no S3
      */
-    static async listObjects(params?: ListObjectsParams): Promise<ListObjectsResponse> {
+    async listObjects(params?: ListObjectsParams): Promise<ListObjectsResponse> {
         const queryParams = new URLSearchParams()
 
         if (params?.prefix) {
@@ -131,7 +131,7 @@ export class S3Service {
             queryParams.append('maxKeys', params.maxKeys.toString())
         }
 
-        const url = `${S3_BASE_URL}/list${queryParams.toString() ? `?${queryParams.toString()}` : ''}`
+        const url = `${this.url}/list${queryParams.toString() ? `?${queryParams.toString()}` : ''}`
 
         return HttpClient.get<ListObjectsResponse>(url)
     }
@@ -139,44 +139,44 @@ export class S3Service {
     /**
      * Verifica se um objeto existe no S3
      */
-    static async objectExists(objectKey: string): Promise<ObjectExistsResponse> {
-        return HttpClient.get<ObjectExistsResponse>(`${S3_BASE_URL}/exists/${objectKey}`)
+    async objectExists(objectKey: string): Promise<ObjectExistsResponse> {
+        return HttpClient.get<ObjectExistsResponse>(`${this.url}/exists/${objectKey}`)
     }
 
     /**
      * Obtém metadados de um objeto
      */
-    static async getObjectMetadata(objectKey: string): Promise<ObjectMetadata> {
-        return HttpClient.get<ObjectMetadata>(`${S3_BASE_URL}/metadata/${objectKey}`)
+    async getObjectMetadata(objectKey: string): Promise<ObjectMetadata> {
+        return HttpClient.get<ObjectMetadata>(`${this.url}/metadata/${objectKey}`)
     }
 
     /**
      * Copia um objeto no S3
      */
-    static async copyObject(source: string, destination: string): Promise<CopyMoveResponse> {
+    async copyObject(source: string, destination: string): Promise<CopyMoveResponse> {
         const params = new URLSearchParams()
         params.append('source', source)
         params.append('destination', destination)
 
-        return HttpClient.post<CopyMoveResponse>(`${S3_BASE_URL}/copy?${params.toString()}`, undefined)
+        return HttpClient.post<CopyMoveResponse>(`${this.url}/copy?${params.toString()}`, undefined)
     }
 
     /**
      * Move um objeto no S3
      */
-    static async moveObject(source: string, destination: string): Promise<CopyMoveResponse> {
+    async moveObject(source: string, destination: string): Promise<CopyMoveResponse> {
         const params = new URLSearchParams()
         params.append('source', source)
         params.append('destination', destination)
 
-        return HttpClient.post<CopyMoveResponse>(`${S3_BASE_URL}/move?${params.toString()}`, undefined)
+        return HttpClient.post<CopyMoveResponse>(`${this.url}/move?${params.toString()}`, undefined)
     }
 
     /**
      * Faz upload direto para o S3 usando URL pré-assinada
      * Útil para uploads grandes sem passar pelo backend
      */
-    static async uploadToPresignedUrl(presignedUrl: string, file: File, contentType: string): Promise<void> {
+    async uploadToPresignedUrl(presignedUrl: string, file: File, contentType: string): Promise<void> {
         const response = await fetch(presignedUrl, {
             method: 'PUT',
             headers: {
