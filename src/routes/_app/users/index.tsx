@@ -1,13 +1,13 @@
+import { useQuery } from '@tanstack/react-query'
+import { createFileRoute } from '@tanstack/react-router'
+import type { UserSchema } from '@/lib/types/user'
 import { CreateUserDialog } from '@/components/create-user-dialog'
 import { ErrorState } from '@/components/error-state'
 import { Badge } from '@/components/ui/badge'
 import { UsersFilterSheet } from '@/components/users-filter-sheet'
 import { UsersTable } from '@/components/users-table'
 import { userService } from '@/lib/services/user-service'
-import { UserSchema } from '@/lib/types/user'
 import { UserFiltersProvider, useUserFiltersContext } from '@/providers/user-filters-provider'
-import { useQuery } from '@tanstack/react-query'
-import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_app/users/')({
     component: UsersPageComponent
@@ -31,7 +31,7 @@ function RouteComponent() {
     })
 
     if (error) {
-        return <ErrorState title="Erro ao carregar usuários" message={(error as Error).message} />
+        return <ErrorState title="Erro ao carregar usuários" message={(error).message} />
     }
 
     return (

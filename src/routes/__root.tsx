@@ -1,12 +1,12 @@
 import { TanStackDevtools } from '@tanstack/react-devtools'
-import type { QueryClient } from '@tanstack/react-query'
-import { createRootRouteWithContext, HeadContent, redirect, Scripts } from '@tanstack/react-router'
+import { HeadContent, Scripts, createRootRouteWithContext, redirect } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { createServerFn } from '@tanstack/react-start'
 import * as React from 'react'
 import { authMiddleware } from '../middleware'
 import TanStackQueryDevtools from '../providers/tanstack-query/devtools'
 import appCss from '../styles.css?url'
+import type { QueryClient } from '@tanstack/react-query'
 
 interface MyRouterContext {
     queryClient: QueryClient

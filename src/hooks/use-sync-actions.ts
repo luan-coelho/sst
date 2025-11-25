@@ -1,4 +1,5 @@
-import { syncService } from '@/lib/services/sync-service'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { toast } from 'sonner'
 import type {
     HierarchyByCompanyCode,
     SocCompanyApiData,
@@ -7,8 +8,7 @@ import type {
     SocUnitApiData,
     SyncResponse
 } from '@/lib/types/sync'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { toast } from 'sonner'
+import { syncService } from '@/lib/services/sync-service'
 
 /**
  * Hook para gerenciar ações de sincronização SOC
@@ -50,25 +50,25 @@ export function useSyncActions() {
     })
 
     const syncCompaniesMutation = useMutation({
-        mutationFn: (companies: SocCompanyApiData[]) => syncService.syncCompanies(companies),
+        mutationFn: (companies: Array<SocCompanyApiData>) => syncService.syncCompanies(companies),
         onSuccess: handleSuccess,
         onError: handleError
     })
 
     const syncUnitsMutation = useMutation({
-        mutationFn: (units: SocUnitApiData[]) => syncService.syncUnits(units),
+        mutationFn: (units: Array<SocUnitApiData>) => syncService.syncUnits(units),
         onSuccess: handleSuccess,
         onError: handleError
     })
 
     const syncSectorsMutation = useMutation({
-        mutationFn: (sectors: SocSectorApiData[]) => syncService.syncSectors(sectors),
+        mutationFn: (sectors: Array<SocSectorApiData>) => syncService.syncSectors(sectors),
         onSuccess: handleSuccess,
         onError: handleError
     })
 
     const syncJobsMutation = useMutation({
-        mutationFn: (jobs: SocJobApiData[]) => syncService.syncJobs(jobs),
+        mutationFn: (jobs: Array<SocJobApiData>) => syncService.syncJobs(jobs),
         onSuccess: handleSuccess,
         onError: handleError
     })

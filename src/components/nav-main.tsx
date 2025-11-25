@@ -1,5 +1,8 @@
 'use client'
 
+import { Link, useLocation } from '@tanstack/react-router'
+import { ChevronRight  } from 'lucide-react'
+import type {LucideIcon} from 'lucide-react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import {
     SidebarGroup,
@@ -11,22 +14,20 @@ import {
     SidebarMenuSubButton,
     SidebarMenuSubItem
 } from '@/components/ui/sidebar'
-import { Link, useLocation } from '@tanstack/react-router'
-import { ChevronRight, type LucideIcon } from 'lucide-react'
 
 export function NavMain({
     items
 }: {
-    items: {
+    items: Array<{
         title: string
         url: string
         icon?: LucideIcon
         isActive?: boolean
-        items?: {
+        items?: Array<{
             title: string
             url: string
-        }[]
-    }[]
+        }>
+    }>
 }) {
     const location = useLocation()
 

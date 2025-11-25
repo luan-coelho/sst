@@ -1,3 +1,11 @@
+import { AvatarFallback } from '@radix-ui/react-avatar'
+import { Separator } from '@radix-ui/react-select'
+import { TabsContent } from '@radix-ui/react-tabs'
+import { useQuery } from '@tanstack/react-query'
+import { Link, createFileRoute } from '@tanstack/react-router'
+import { ArrowLeft, Calendar, CheckCircle2, Clock, Edit, Mail, Phone, Shield, User, XCircle } from 'lucide-react'
+import { useState } from 'react'
+import type { RoleSchema } from '@/lib/types/user'
 import { EditUserDialog } from '@/components/edit-user-dialog'
 import { ErrorState } from '@/components/error-state'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
@@ -15,14 +23,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Skeleton } from '@/components/ui/skeleton'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { userService } from '@/lib/services/user-service'
-import { RoleSchema } from '@/lib/types/user'
-import { AvatarFallback } from '@radix-ui/react-avatar'
-import { Separator } from '@radix-ui/react-select'
-import { TabsContent } from '@radix-ui/react-tabs'
-import { useQuery } from '@tanstack/react-query'
-import { createFileRoute, Link } from '@tanstack/react-router'
-import { ArrowLeft, Calendar, CheckCircle2, Clock, Edit, Mail, Phone, Shield, User, XCircle } from 'lucide-react'
-import { useState } from 'react'
 
 export const Route = createFileRoute('/_app/users/$userId')({
     component: RouteComponent

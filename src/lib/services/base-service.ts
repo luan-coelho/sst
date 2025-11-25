@@ -1,10 +1,10 @@
 import { HttpClient } from '../http-client'
 import { buildQuery } from '../query-builder'
-import { ApiResponseSucess, PaginatedResponse } from '../types/api'
-import { QueryParams } from '../types/filters'
+import type { ApiResponseSucess, PaginatedResponse } from '../types/api'
+import type { QueryParams } from '../types/filters'
 
 export abstract class BaseService {
-    protected baseUrl: string = 'http://localhost:8081'
+    protected baseUrl = 'http://localhost:8081'
     protected uri: string
 
     constructor(uri: string) {

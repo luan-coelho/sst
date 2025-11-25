@@ -1,4 +1,3 @@
-import { HttpClient } from '@/lib/http-client'
 import type {
     HierarchyByCompanyCode,
     SocCompanyApiData,
@@ -7,6 +6,7 @@ import type {
     SocUnitApiData,
     SyncResponse
 } from '@/lib/types/sync'
+import { HttpClient } from '@/lib/http-client'
 
 /**
  * Serviço para gerenciar sincronização de dados SOC
@@ -30,7 +30,7 @@ export class SyncService {
      * @param companies - Array de empresas da API SOC
      * @returns Promise com o resultado da sincronização
      */
-    async syncCompanies(companies: SocCompanyApiData[]): Promise<SyncResponse> {
+    async syncCompanies(companies: Array<SocCompanyApiData>): Promise<SyncResponse> {
         return HttpClient.post<SyncResponse>(`${this.BASE_PATH}/companies`, companies)
     }
 
@@ -40,7 +40,7 @@ export class SyncService {
      * @param units - Array de unidades da API SOC
      * @returns Promise com o resultado da sincronização
      */
-    async syncUnits(units: SocUnitApiData[]): Promise<SyncResponse> {
+    async syncUnits(units: Array<SocUnitApiData>): Promise<SyncResponse> {
         return HttpClient.post<SyncResponse>(`${this.BASE_PATH}/units`, units)
     }
 
@@ -50,7 +50,7 @@ export class SyncService {
      * @param sectors - Array de setores da API SOC
      * @returns Promise com o resultado da sincronização
      */
-    async syncSectors(sectors: SocSectorApiData[]): Promise<SyncResponse> {
+    async syncSectors(sectors: Array<SocSectorApiData>): Promise<SyncResponse> {
         return HttpClient.post<SyncResponse>(`${this.BASE_PATH}/sectors`, sectors)
     }
 
@@ -60,7 +60,7 @@ export class SyncService {
      * @param jobs - Array de cargos da API SOC
      * @returns Promise com o resultado da sincronização
      */
-    async syncJobs(jobs: SocJobApiData[]): Promise<SyncResponse> {
+    async syncJobs(jobs: Array<SocJobApiData>): Promise<SyncResponse> {
         return HttpClient.post<SyncResponse>(`${this.BASE_PATH}/jobs`, jobs)
     }
 

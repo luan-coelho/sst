@@ -1,5 +1,6 @@
 'use client'
 
+import { Filter, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -16,7 +17,6 @@ import {
 } from '@/components/ui/sheet'
 import { cn } from '@/lib/utils'
 import { useUserFiltersContext } from '@/providers/user-filters-provider'
-import { Filter, X } from 'lucide-react'
 
 type UsersFilterSheetProps = {
     className?: string

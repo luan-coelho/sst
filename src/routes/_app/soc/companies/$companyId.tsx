@@ -1,3 +1,18 @@
+import { useQuery } from '@tanstack/react-query'
+import { Link, createFileRoute } from '@tanstack/react-router'
+import {
+    ArrowLeft,
+    ArrowRight,
+    Building2,
+    Calendar,
+    CheckCircle2,
+    Clock,
+    FileText,
+    MapPin,
+    Users,
+    XCircle
+} from 'lucide-react'
+import type { SocUnit } from '@/lib/types/soc'
 import { ErrorState } from '@/components/error-state'
 import { Badge } from '@/components/ui/badge'
 import {
@@ -15,21 +30,6 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { socCompanyService } from '@/lib/services/company-service'
-import type { SocUnit } from '@/lib/types/soc'
-import { useQuery } from '@tanstack/react-query'
-import { createFileRoute, Link } from '@tanstack/react-router'
-import {
-    ArrowLeft,
-    ArrowRight,
-    Building2,
-    Calendar,
-    CheckCircle2,
-    Clock,
-    FileText,
-    MapPin,
-    Users,
-    XCircle
-} from 'lucide-react'
 
 export const Route = createFileRoute('/_app/soc/companies/$companyId')({
     component: CompanyPage
@@ -358,7 +358,7 @@ function getRiskDegreeLabel(degree: string) {
     return `Grau ${degree}`
 }
 
-function UnitsTable({ units }: { units: SocUnit[] }) {
+function UnitsTable({ units }: { units: Array<SocUnit> }) {
     if (!units.length) {
         return (
             <div className="flex flex-col items-center justify-center rounded-lg border border-dashed p-12 text-center">

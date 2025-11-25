@@ -1,5 +1,5 @@
-import type { QueryParams } from '@/lib/types/filters'
 import { createContext, useCallback, useContext, useMemo, useState } from 'react'
+import type { QueryParams } from '@/lib/types/filters'
 
 interface FiltersContextData<TFilterState> {
     queryParams: QueryParams

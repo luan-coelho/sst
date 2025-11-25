@@ -1,5 +1,8 @@
 'use client'
 
+import { useNavigate } from '@tanstack/react-router'
+import { ChevronsUpDown, LogOut } from 'lucide-react'
+import { Skeleton } from './ui/skeleton'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import {
     DropdownMenu,
@@ -12,9 +15,6 @@ import {
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar'
 import { authClient } from '@/lib/auth-client'
 import { getLogoutUrl } from '@/server/auth'
-import { useNavigate } from '@tanstack/react-router'
-import { ChevronsUpDown, LogOut } from 'lucide-react'
-import { Skeleton } from './ui/skeleton'
 
 export function NavUser() {
     const { data: session, isPending } = authClient.useSession()

@@ -1,4 +1,6 @@
+import { describe, expect, it } from 'vitest'
 import {
+    QueryBuilder,
     buildQuery,
     eq,
     gt,
@@ -8,11 +10,9 @@ import {
     lt,
     lte,
     neq,
-    QueryBuilder,
     sortAsc,
     sortDesc
 } from '@/lib/query-builder'
-import { describe, expect, it } from 'vitest'
 
 describe('QueryBuilder', () => {
     describe('Paginação', () => {

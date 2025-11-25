@@ -1,7 +1,7 @@
+import { Link, createFileRoute } from '@tanstack/react-router'
+import { Building2 } from 'lucide-react'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { createFileRoute, Link } from '@tanstack/react-router'
-import { Building2 } from 'lucide-react'
 
 export const Route = createFileRoute('/_app/soc/')({
     component: RouteComponent
