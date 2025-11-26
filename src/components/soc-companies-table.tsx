@@ -1,8 +1,5 @@
 'use client'
 
-import { Link } from '@tanstack/react-router'
-import { Building2, ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react'
-import type { SocCompany } from '@/lib/types/soc'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -15,7 +12,10 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import type { SocCompany } from '@/lib/types/soc'
 import { useSocCompanyFiltersContext } from '@/providers/company-filters-provider'
+import { Link } from '@tanstack/react-router'
+import { Building2, ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react'
 
 interface SocCompaniesTableProps {
     companies: Array<SocCompany>

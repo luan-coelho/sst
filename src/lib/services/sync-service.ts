@@ -1,3 +1,4 @@
+import { HttpClient } from '@/lib/http-client'
 import type {
     HierarchyByCompanyCode,
     SocCompanyApiData,
@@ -6,7 +7,6 @@ import type {
     SocUnitApiData,
     SyncResponse
 } from '@/lib/types/sync'
-import { HttpClient } from '@/lib/http-client'
 
 /**
  * Serviço para gerenciar sincronização de dados SOC

@@ -1,5 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { toast } from 'sonner'
+import { syncService } from '@/lib/services/sync-service'
 import type {
     HierarchyByCompanyCode,
     SocCompanyApiData,
@@ -8,7 +7,8 @@ import type {
     SocUnitApiData,
     SyncResponse
 } from '@/lib/types/sync'
-import { syncService } from '@/lib/services/sync-service'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { toast } from 'sonner'
 
 /**
  * Hook para gerenciar ações de sincronização SOC

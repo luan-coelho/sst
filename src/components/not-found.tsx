@@ -1,7 +1,7 @@
+import { Button } from '@/components/ui/button'
 import { useRouter } from '@tanstack/react-router'
 import { ArrowLeft, Ghost, Home } from 'lucide-react'
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '../components/ui/empty'
-import { Button } from '@/components/ui/button'
 
 export default function NotFound() {
     const router = useRouter()

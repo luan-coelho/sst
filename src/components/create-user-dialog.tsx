@@ -1,10 +1,3 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { UserPlus } from 'lucide-react'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
-import type {CreateUserSchema} from '@/lib/types/user';
 import { InputMask } from '@/components/input-mask'
 import { Button } from '@/components/ui/button'
 import {
@@ -20,8 +13,14 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { userService } from '@/lib/services/user-service'
-import {  createUserSchema, userRoles } from '@/lib/types/user'
+import { createUserSchema, userRoles, type CreateUserSchema } from '@/lib/types/user'
 import { cn } from '@/lib/utils'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { UserPlus } from 'lucide-react'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 
 type CreateUserDialogProps = {
     className?: string

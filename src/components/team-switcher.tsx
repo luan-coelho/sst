@@ -1,7 +1,7 @@
 'use client'
 
-import { GalleryVerticalEnd } from 'lucide-react'
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar'
+import { GalleryVerticalEnd } from 'lucide-react'
 
 export function TeamSwitcher() {
     return (

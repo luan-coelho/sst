@@ -1,14 +1,14 @@
-import { useQuery } from '@tanstack/react-query'
-import { createFileRoute } from '@tanstack/react-router'
-import { Building2 } from 'lucide-react'
-import type { SocCompany } from '@/lib/types/soc'
 import { ErrorState } from '@/components/error-state'
 import { CompaniesFilterSheet } from '@/components/soc-companies-filter-sheet'
 import { SocCompaniesTable } from '@/components/soc-companies-table'
 import { SyncButton } from '@/components/soc-sync-button'
 import { Badge } from '@/components/ui/badge'
 import { socCompanyService } from '@/lib/services/company-service'
+import type { SocCompany } from '@/lib/types/soc'
 import { SocCompanyFiltersProvider, useSocCompanyFiltersContext } from '@/providers/company-filters-provider'
+import { useQuery } from '@tanstack/react-query'
+import { createFileRoute } from '@tanstack/react-router'
+import { Building2 } from 'lucide-react'
 
 export const Route = createFileRoute('/_app/soc/companies/')({
     component: CompaniesPage
@@ -32,7 +32,7 @@ function RouteComponent() {
     })
 
     if (error) {
-        return <ErrorState title="Erro ao carregar empresas" message={(error).message} />
+        return <ErrorState title="Erro ao carregar empresas" message={error.message} />
     }
 
     return (

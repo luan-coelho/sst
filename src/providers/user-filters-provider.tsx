@@ -1,6 +1,6 @@
-import { createFiltersProvider } from './filters-provider'
 import type { QueryParams } from '@/lib/types/filters'
 import type { FilterState } from '@/lib/types/user-filters'
+import { createFiltersProvider } from './filters-provider'
 
 const INITIAL_QUERY_PARAMS: QueryParams = {
     page: 0,

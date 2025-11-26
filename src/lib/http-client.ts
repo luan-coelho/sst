@@ -1,6 +1,6 @@
+import { ApiError } from '@/lib/types/api'
 import { authClient } from './auth-client'
 import { getApiUrl } from './env-config'
-import { ApiError } from '@/lib/types/api'
 
 /**
  * Cliente HTTP com suporte a autenticação JWT
