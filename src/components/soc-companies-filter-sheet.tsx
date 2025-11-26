@@ -4,10 +4,18 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import {
+    Sheet,
+    SheetClose,
+    SheetContent,
+    SheetDescription,
+    SheetFooter,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger
+} from '@/components/ui/sheet'
 import { useSocCompanyFiltersContext } from '@/providers/company-filters-provider'
 import { Filter, X } from 'lucide-react'
-import { useState } from 'react'
 
 interface CompaniesFilterSheetProps {
     className?: string
@@ -15,33 +23,22 @@ interface CompaniesFilterSheetProps {
 
 export function CompaniesFilterSheet({ className }: CompaniesFilterSheetProps) {
     const { tempFilters, setTempFilters, applyFilters, clearFilters } = useSocCompanyFiltersContext()
-    const [open, setOpen] = useState(false)
-
-    function handleSubmit(e: React.FormEvent) {
-        e.preventDefault()
-        applyFilters()
-        setOpen(false)
-    }
-
-    function handleReset() {
-        clearFilters()
-        setOpen(false)
-    }
 
     return (
-        <Sheet open={open} onOpenChange={setOpen}>
+        <Sheet>
             <SheetTrigger asChild>
                 <Button variant="outline" className={className}>
                     <Filter className="mr-2 h-4 w-4" />
                     Filtros
                 </Button>
             </SheetTrigger>
-            <SheetContent>
-                <SheetHeader>
+            <SheetContent className="p-5">
+                <SheetHeader className="p-0">
                     <SheetTitle>Filtrar empresas</SheetTitle>
                     <SheetDescription>Refine sua busca utilizando os filtros abaixo</SheetDescription>
                 </SheetHeader>
-                <form onSubmit={handleSubmit} className="mt-6 space-y-6">
+
+                <div className="space-y-6 py-6">
                     <div className="space-y-2">
                         <Label htmlFor="search">Buscar</Label>
                         <Input
@@ -59,7 +56,7 @@ export function CompaniesFilterSheet({ className }: CompaniesFilterSheetProps) {
                             onValueChange={(value: 'all' | 'active' | 'inactive') =>
                                 setTempFilters(prev => ({ ...prev, status: value }))
                             }>
-                            <SelectTrigger id="status">
+                            <SelectTrigger id="status" className="w-full">
                                 <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
@@ -77,7 +74,7 @@ export function CompaniesFilterSheet({ className }: CompaniesFilterSheetProps) {
                             onValueChange={(value: 'all' | '1' | '2' | '3' | '4') =>
                                 setTempFilters(prev => ({ ...prev, riskDegree: value }))
                             }>
-                            <SelectTrigger id="riskDegree">
+                            <SelectTrigger id="riskDegree" className="w-full">
                                 <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
@@ -89,16 +86,20 @@ export function CompaniesFilterSheet({ className }: CompaniesFilterSheetProps) {
                             </SelectContent>
                         </Select>
                     </div>
+                </div>
 
-                    <div className="flex gap-2 pt-4">
-                        <Button type="submit" className="flex-1">
-                            Aplicar filtros
+                <SheetFooter className="gap-2">
+                    <Button variant="outline" onClick={clearFilters} className="flex-1">
+                        <X className="mr-2 h-4 w-4" />
+                        Limpar
+                    </Button>
+                    <SheetClose asChild>
+                        <Button onClick={applyFilters} className="flex-1">
+                            <Filter className="mr-2 h-4 w-4" />
+                            Aplicar
                         </Button>
-                        <Button type="button" variant="outline" onClick={handleReset}>
-                            <X className="h-4 w-4" />
-                        </Button>
-                    </div>
-                </form>
+                    </SheetClose>
+                </SheetFooter>
             </SheetContent>
         </Sheet>
     )

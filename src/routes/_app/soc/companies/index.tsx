@@ -56,7 +56,7 @@ function RouteComponent() {
                         </Badge>
                     )}
                     <div className="flex gap-2">
-                        <SyncButton variant="outline" size="default" />
+                        <SyncButton />
                         <CompaniesFilterSheet className="w-full sm:w-auto" />
                     </div>
                 </div>
