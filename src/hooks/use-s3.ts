@@ -1,11 +1,11 @@
-import { S3Service } from '@/lib/services/s3-service'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import type {
     ListObjectsParams,
     PresignedUrlDownloadRequest,
     PresignedUrlUploadRequest,
     UploadFileRequest
 } from '@/lib/types/s3'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { S3Service } from '@/lib/services/s3-service'
 
 /**
  * Hook para fazer upload de arquivos

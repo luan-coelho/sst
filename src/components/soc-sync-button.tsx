@@ -1,3 +1,5 @@
+import { Building2, ChevronDown, Database, GitBranch, Loader2, Network, RefreshCw, Users } from 'lucide-react'
+import { useState } from 'react'
 import {
     AlertDialog,
     AlertDialogAction,
@@ -18,8 +20,6 @@ import {
     DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { useSyncActions } from '@/hooks/use-sync-actions'
-import { Building2, ChevronDown, Database, GitBranch, Loader2, Network, RefreshCw, Users } from 'lucide-react'
-import { useState } from 'react'
 
 type SyncAction = 'full' | 'companies' | 'units' | 'sectors' | 'jobs' | 'hierarchies' | null
 

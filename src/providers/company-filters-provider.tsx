@@ -1,6 +1,6 @@
+import { createFiltersProvider } from './filters-provider'
 import type { SocCompanyFilterState } from '@/lib/types/company-filters'
 import type { QueryParams } from '@/lib/types/filters'
-import { createFiltersProvider } from './filters-provider'
 
 const INITIAL_QUERY_PARAMS: QueryParams = {
     page: 0,

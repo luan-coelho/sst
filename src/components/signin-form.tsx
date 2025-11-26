@@ -1,15 +1,16 @@
 'use client'
 
-import { useAuth } from '@//hooks/use-auth'
-import { cn } from '@//lib/utils'
-import { loginSchema, type LoginSchema } from '@//types/auth'
-import { Button } from '@/components/ui/button'
-import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
-import { Input } from '@/components/ui/input'
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { toast } from 'sonner'
+import type {LoginSchema} from '@//types/auth';
+import { useAuth } from '@//hooks/use-auth'
+import { cn } from '@//lib/utils'
+import {  loginSchema } from '@//types/auth'
+import { Button } from '@/components/ui/button'
+import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
 
 export function SignInForm({ className, ...props }: React.ComponentProps<'form'>) {
     const { signIn } = useAuth()

@@ -1,6 +1,6 @@
-import { HttpClient } from '@/lib/http-client'
 import type { ApiResponseSucess } from '@/lib/types/api'
 import type { SocUnit } from '@/lib/types/soc'
+import { HttpClient } from '@/lib/http-client'
 
 /**
  * Serviço para gerenciar unidades
