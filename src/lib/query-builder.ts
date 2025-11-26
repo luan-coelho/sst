@@ -1,4 +1,4 @@
-import type { FilterValue, Filters, QueryBuilderOptions, QueryParams, SortConfig } from '@/lib/types/filters'
+import type { Filters, FilterValue, QueryBuilderOptions, QueryParams, SortConfig } from '@/lib/types/filters'
 
 /**
  * Constrói query string a partir de parâmetros estruturados

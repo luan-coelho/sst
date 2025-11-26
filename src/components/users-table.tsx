@@ -1,10 +1,5 @@
 'use client'
 
-import { Link } from '@tanstack/react-router'
-import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react'
-import { useState } from 'react'
-import { EditUserDialog } from './edit-user-dialog'
-import type { UserSchema } from '@/lib/types/user'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -17,7 +12,12 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import type { UserSchema } from '@/lib/types/user'
 import { useUserFiltersContext } from '@/providers/user-filters-provider'
+import { Link } from '@tanstack/react-router'
+import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react'
+import { useState } from 'react'
+import { EditUserDialog } from './edit-user-dialog'
 
 interface UsersTableProps {
     users: Array<UserSchema>

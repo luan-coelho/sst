@@ -1,4 +1,5 @@
-import { BaseService } from './base-service'
+import { authClient } from '@/lib/auth-client'
+import { HttpClient } from '@/lib/http-client'
 import type {
     CopyMoveResponse,
     ListObjectsParams,
@@ -11,8 +12,7 @@ import type {
     UploadFileRequest,
     UploadFileResponse
 } from '@/lib/types/s3'
-import { authClient } from '@/lib/auth-client'
-import { HttpClient } from '@/lib/http-client'
+import { BaseService } from './base-service'
 
 /**
  * Service para comunicação com a API S3

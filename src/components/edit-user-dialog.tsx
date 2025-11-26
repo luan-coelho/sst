@@ -1,9 +1,3 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
-import type {UpdateUserSchema, UserSchema} from '@/lib/types/user';
 import { InputMask } from '@/components/input-mask'
 import { Button } from '@/components/ui/button'
 import {
@@ -18,7 +12,12 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { userService } from '@/lib/services/user-service'
-import {   updateUserSchema, userRoles } from '@/lib/types/user'
+import { updateUserSchema, userRoles, type UpdateUserSchema, type UserSchema } from '@/lib/types/user'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 
 interface EditUserDialogProps {
     user: UserSchema | null

@@ -1,13 +1,13 @@
 'use client'
 
-import { Filter, X } from 'lucide-react'
-import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { useSocCompanyFiltersContext } from '@/providers/company-filters-provider'
+import { Filter, X } from 'lucide-react'
+import { useState } from 'react'
 
 interface CompaniesFilterSheetProps {
     className?: string

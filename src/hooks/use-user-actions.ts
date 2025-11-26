@@ -1,8 +1,8 @@
+import { userService } from '@/lib/services/user-service'
+import type { UserSchema } from '@/lib/types/user'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from '@tanstack/react-router'
 import { toast } from 'sonner'
-import type { UserSchema } from '@/lib/types/user'
-import { userService } from '@/lib/services/user-service'
 
 export function useUserActions() {
     const router = useRouter()
