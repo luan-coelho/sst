@@ -1,7 +1,7 @@
-import { Outlet, createFileRoute } from '@tanstack/react-router'
 import { AppSidebar } from '@/components/app-sidebar'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
+import { createFileRoute, Outlet } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_app')({
     component: RouteComponent
@@ -22,7 +22,7 @@ function RouteComponent() {
                         </div>
                     </div>
                 </header>
-                <main className="flex flex-1 flex-col gap-4 p-4">
+                <main className="flex flex-1 flex-col gap-4 p-10">
                     <Outlet />
                 </main>
             </SidebarInset>

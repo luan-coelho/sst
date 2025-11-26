@@ -1,18 +1,3 @@
-import { useQuery } from '@tanstack/react-query'
-import { Link, createFileRoute } from '@tanstack/react-router'
-import {
-    ArrowLeft,
-    ArrowRight,
-    Building2,
-    Calendar,
-    CheckCircle2,
-    Clock,
-    FileText,
-    MapPin,
-    Users,
-    XCircle
-} from 'lucide-react'
-import type { SocUnit } from '@/lib/types/soc'
 import { ErrorState } from '@/components/error-state'
 import { Badge } from '@/components/ui/badge'
 import {
@@ -30,6 +15,21 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { socCompanyService } from '@/lib/services/company-service'
+import { SocCompany, type SocUnit } from '@/lib/types/soc'
+import { useQuery } from '@tanstack/react-query'
+import { createFileRoute, Link } from '@tanstack/react-router'
+import {
+    ArrowLeft,
+    ArrowRight,
+    Building2,
+    Calendar,
+    CheckCircle2,
+    Clock,
+    FileText,
+    MapPin,
+    Users,
+    XCircle
+} from 'lucide-react'
 
 export const Route = createFileRoute('/_app/soc/companies/$companyId')({
     component: CompanyPage
@@ -44,7 +44,7 @@ function CompanyPage() {
         error
     } = useQuery({
         queryKey: ['soc-company', companyId],
-        queryFn: () => socCompanyService.findById(companyId),
+        queryFn: () => socCompanyService.getById<SocCompany>(companyId),
         enabled: !!companyId
     })
 
