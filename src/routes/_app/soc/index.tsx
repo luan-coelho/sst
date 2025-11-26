@@ -4,6 +4,13 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { Building2 } from 'lucide-react'
 
 export const Route = createFileRoute('/_app/soc/')({
+    head: () => ({
+        meta: [
+            {
+                title: 'SOC'
+            }
+        ]
+    }),
     component: RouteComponent
 })
 

@@ -1,5 +1,6 @@
 'use client'
 
+import { DataTablePagination } from '@/components/data-table-pagination'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -15,7 +16,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import type { SocCompany } from '@/lib/types/soc'
 import { useSocCompanyFiltersContext } from '@/providers/company-filters-provider'
 import { Link } from '@tanstack/react-router'
-import { Building2, ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react'
+import { Building2, MoreHorizontal } from 'lucide-react'
 
 interface SocCompaniesTableProps {
     companies: Array<SocCompany>
@@ -135,37 +136,14 @@ export function SocCompaniesTable({ companies, isLoading, pagination }: SocCompa
                 </Table>
             </div>
 
-            {pagination && pagination.totalPages > 1 && (
-                <div className="flex items-center justify-between">
-                    <div className="text-muted-foreground text-sm">
-                        Mostrando {pagination.page * pagination.pageSize + 1} até{' '}
-                        {Math.min((pagination.page + 1) * pagination.pageSize, pagination.totalElements)} de{' '}
-                        {pagination.totalElements} resultados
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => changePage(pagination.page - 1)}
-                            disabled={pagination.page === 0}>
-                            <ChevronLeft className="mr-1 h-4 w-4" />
-                            Anterior
-                        </Button>
-                        <div className="flex items-center gap-1">
-                            <span className="text-sm">
-                                Página {pagination.page + 1} de {pagination.totalPages}
-                            </span>
-                        </div>
-                        <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => changePage(pagination.page + 1)}
-                            disabled={pagination.page >= pagination.totalPages - 1}>
-                            Próxima
-                            <ChevronRight className="ml-1 h-4 w-4" />
-                        </Button>
-                    </div>
-                </div>
+            {pagination && (
+                <DataTablePagination
+                    page={pagination.page}
+                    pageSize={pagination.pageSize}
+                    totalPages={pagination.totalPages}
+                    totalElements={pagination.totalElements}
+                    onPageChange={changePage}
+                />
             )}
         </div>
     )

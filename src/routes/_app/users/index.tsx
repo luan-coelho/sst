@@ -10,6 +10,13 @@ import { useQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_app/users/')({
+    head: () => ({
+        meta: [
+            {
+                title: 'Usuários'
+            }
+        ]
+    }),
     component: UsersPageComponent
 })
 

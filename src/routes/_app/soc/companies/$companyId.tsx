@@ -32,6 +32,13 @@ import {
 } from 'lucide-react'
 
 export const Route = createFileRoute('/_app/soc/companies/$companyId')({
+    head: () => ({
+        meta: [
+            {
+                title: 'Empresa'
+            }
+        ]
+    }),
     component: CompanyPage
 })
 

@@ -15,7 +15,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Skeleton } from '@/components/ui/skeleton'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { userService } from '@/lib/services/user-service'
-import type { RoleSchema } from '@/lib/types/user'
+import type { RoleSchema, UserSchema } from '@/lib/types/user'
 import { AvatarFallback } from '@radix-ui/react-avatar'
 import { Separator } from '@radix-ui/react-select'
 import { TabsContent } from '@radix-ui/react-tabs'
@@ -25,6 +25,13 @@ import { ArrowLeft, Calendar, CheckCircle2, Clock, Edit, Mail, Phone, Shield, Us
 import { useState } from 'react'
 
 export const Route = createFileRoute('/_app/users/$userId')({
+    head: () => ({
+        meta: [
+            {
+                title: 'Usuário'
+            }
+        ]
+    }),
     component: RouteComponent
 })
 
@@ -38,7 +45,7 @@ function RouteComponent() {
         error
     } = useQuery({
         queryKey: ['user', userId],
-        queryFn: () => userService.findById(userId),
+        queryFn: () => userService.getById<UserSchema>(userId),
         enabled: !!userId
     })
 

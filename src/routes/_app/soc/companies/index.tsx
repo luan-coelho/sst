@@ -11,6 +11,13 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Building2 } from 'lucide-react'
 
 export const Route = createFileRoute('/_app/soc/companies/')({
+    head: () => ({
+        meta: [
+            {
+                title: 'Empresas'
+            }
+        ]
+    }),
     component: CompaniesPage
 })
 

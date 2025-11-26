@@ -22,7 +22,7 @@ function RouteComponent() {
                         </div>
                     </div>
                 </header>
-                <main className="flex flex-1 flex-col gap-4 p-10">
+                <main className="m-10 flex flex-1 flex-col gap-4">
                     <Outlet />
                 </main>
             </SidebarInset>
